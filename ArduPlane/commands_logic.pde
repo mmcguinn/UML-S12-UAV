@@ -306,12 +306,14 @@ static bool verify_takeoff()
         int impactTime = (float)(current_loc.alt - home.alt) / 980.0;
         int distance = g_gps->ground_speed * impactTime;
         
-        if (distance >= wp_distance * 100.0)
+        if (distance >= wp_distance * 100.0 || verify_nav_wp())
         {
             g.dropperTrigger = 1;
+            
+            return true
         }
         
-        return verify_nav_wp();
+        return false;
 }
 
 // we are executing a landing
