@@ -310,7 +310,7 @@ static bool verify_takeoff()
         {
             g.dropperTrigger = 1;
             
-            return true
+            return true;
         }
         
         return false;
@@ -359,6 +359,24 @@ static bool verify_nav_wp()
 {
 	hold_course = -1;
 	update_crosstrack();
+        
+        //Drop on wp #3//////////////////////
+        if (nav_command_index == 3)
+        {
+            int impactTime = (float)(current_loc.alt - home.alt) / 980.0;
+            int distance = g_gps->ground_speed * impactTime;
+            
+            if (distance >= wp_distance * 100.0)
+            {
+                g.dropperTrigger = 1;
+            }
+        }
+        else if (nav_command_index >= 4)
+        {
+            g.dropperTrigger = 1;
+        }
+        /////////////////////////////
+        
 	if ((wp_distance > 0) && (wp_distance <= g.waypoint_radius)) {
 		gcs_send_text_fmt(PSTR("Reached Waypoint #%i"),nav_command_index);
 		return true;
