@@ -368,12 +368,18 @@ static bool verify_nav_wp()
             
             if (distance >= wp_distance * 100.0)
             {
+                gcs_send_text_fmt(PSTR("Deployed Waypoint #%i"),nav_command_index);
                 g.dropperTrigger = 1;
             }
         }
         else if (nav_command_index >= 4)
         {
             g.dropperTrigger = 1;
+            
+            if (g.dropperTrigger == 0)
+            {
+                gcs_send_text_fmt(PSTR("Deployed Late Waypoint #%i"),nav_command_index);
+            }
         }
         /////////////////////////////
         
