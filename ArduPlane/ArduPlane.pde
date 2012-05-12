@@ -999,7 +999,7 @@ static void update_current_flight_mode(void)
 
 		switch(nav_command_ID){
 			case MAV_CMD_NAV_TAKEOFF:
-				/*if (hold_course != -1) {
+				if (hold_course != -1) {
 					calc_nav_roll();
 				} else {
 					nav_roll = 0;
@@ -1015,13 +1015,13 @@ static void update_current_flight_mode(void)
 				}
 
 				g.channel_throttle.servo_out = g.throttle_max; //TODO: Replace with THROTTLE_TAKEOFF or other method of controlling throttle
-						*/								//  What is the case for doing something else?  Why wouldn't you want max throttle for TO?
+														//  What is the case for doing something else?  Why wouldn't you want max throttle for TO?
 				// ******************************
 
-				hold_course = -1;
+				/*hold_course = -1;
                                 calc_nav_roll();
                                 calc_nav_pitch();
-                                calc_throttle();
+                                calc_throttle();*/
 				
 				break;
 

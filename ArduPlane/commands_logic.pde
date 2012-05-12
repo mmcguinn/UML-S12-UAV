@@ -229,7 +229,7 @@ static void do_RTL(void)
 
 static void do_takeoff()
 {
-	/*set_next_WP(&next_nav_command);
+	set_next_WP(&next_nav_command);
 	// pitch in deg, airspeed  m/s, throttle %, track WP 1 or 0
 	takeoff_pitch 	 	= (int)next_nav_command.p1 * 100;
 			//Serial.printf_P(PSTR("TO pitch:"));	Serial.println(takeoff_pitch);
@@ -240,8 +240,8 @@ static void do_takeoff()
 	next_WP.lng 		= home.lng + 1000;	// so we don't have bad calcs
 	takeoff_complete 	= false;			// set flag to use gps ground course during TO.  IMU will be doing yaw drift correction
 											// Flag also used to override "on the ground" throttle disable
-											*/
-        do_nav_wp();
+											
+        //do_nav_wp();
 }
 
 static void do_nav_wp()
@@ -277,7 +277,7 @@ static void do_loiter_time()
 /********************************************************************************/
 static bool verify_takeoff()
 {
-	/*if (g_gps->ground_speed > 300){
+	if (g_gps->ground_speed > 300){
 		if (hold_course == -1) {
 			// save our current course to take off
 			if(g.compass_enabled) {
@@ -301,9 +301,9 @@ static bool verify_takeoff()
 		return true;
 	} else {
 		return false;
-	}*/
+	}
         
-        int impactTime = (float)(current_loc.alt - home.alt) / 980.0;
+        /*int impactTime = (float)(current_loc.alt - home.alt) / 980.0;
         int distance = g_gps->ground_speed * impactTime;
         
         if (distance >= wp_distance * 100.0 || verify_nav_wp())
@@ -313,7 +313,7 @@ static bool verify_takeoff()
             return true;
         }
         
-        return false;
+        return false;*/
 }
 
 // we are executing a landing
@@ -363,7 +363,7 @@ static bool verify_nav_wp()
         //Drop on wp #3//////////////////////
         if (nav_command_index == 3)
         {
-            int impactTime = (float)(current_loc.alt - home.alt) / 980.0;
+            int impactTime = (float)(current_loc.alt - home.alt) / 981.0;
             int distance = g_gps->ground_speed * impactTime;
             
             if (distance >= wp_distance * 100.0)
